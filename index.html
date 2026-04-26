@@ -979,8 +979,8 @@
     <div class="hero-eyebrow">A Game For Men Who Are Done Losing To Themselves</div>
     <h1>Beat your friends.<br>Or be the <em>burnt pasta</em> guy.</h1>
     <p class="hero-sub">A competitive app where you and your friends level up the basics — cooking, cleaning, diet — and prove it with photos. Win the week. Or get roasted in the group chat.</p>
-    <form class="waitlist-form" id="hero-form" onsubmit="handleSubmit(event)">
-      <input type="email" placeholder="your@email.com" required />
+    <form class="waitlist-form" id="hero-form" action="https://formspree.io/f/xpqknyry" method="POST" onsubmit="handleSubmit(event)">
+      <input type="email" name="email" placeholder="your@email.com" required />
       <button type="submit">Get Early Access</button>
     </form>
     <div class="form-note">Launching Soon • iOS + Android</div>
@@ -1419,8 +1419,8 @@
   <div class="container">
     <h2>Glory is <em>earned.</em></h2>
     <p>Stop tracking yourself in private. Start competing where it counts.</p>
-    <form class="waitlist-form" onsubmit="handleSubmit(event)">
-      <input type="email" placeholder="your@email.com" required />
+    <form class="waitlist-form" action="https://formspree.io/f/xpqknyry" method="POST" onsubmit="handleSubmit(event)">
+      <input type="email" name="email" placeholder="your@email.com" required />
       <button type="submit">Claim Your Spot</button>
     </form>
     <div class="form-note">No spam. Just launch updates.</div>
@@ -1438,18 +1438,50 @@
   function toggleFaq(el) {
     el.classList.toggle('open');
   }
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const input = e.target.querySelector('input');
-    const button = e.target.querySelector('button');
+    const form = e.target;
+    const input = form.querySelector('input');
+    const button = form.querySelector('button');
     const original = button.textContent;
-    button.textContent = "You're in";
-    button.style.background = '#6b8f4a';
-    input.value = '';
-    setTimeout(() => {
-      button.textContent = original;
-      button.style.background = '';
-    }, 2400);
+
+    button.textContent = "Sending...";
+    button.disabled = true;
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        button.textContent = "You're in";
+        button.style.background = '#6b8f4a';
+        input.value = '';
+        setTimeout(() => {
+          button.textContent = original;
+          button.style.background = '';
+          button.disabled = false;
+        }, 3000);
+      } else {
+        button.textContent = "Try again";
+        button.style.background = '#c5604a';
+        setTimeout(() => {
+          button.textContent = original;
+          button.style.background = '';
+          button.disabled = false;
+        }, 2400);
+      }
+    } catch (err) {
+      button.textContent = "Try again";
+      button.style.background = '#c5604a';
+      setTimeout(() => {
+        button.textContent = original;
+        button.style.background = '';
+        button.disabled = false;
+      }, 2400);
+    }
   }
 </script>
 
