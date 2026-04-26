@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kleios — Glory Is Earned</title>
+<meta name="description" content="A competitive game for guys who are done losing to themselves. Compete with your friends across cooking, cleaning, and diet. Prove what you did. Earn your glory." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e0c;
+    --bg-card: #16161310;
+    --bg-elevated: #1a1a17;
+    --ink: #f4f1ea;
+    --ink-dim: #a8a39a;
+    --ink-faint: #5d5a52;
+    --accent: #d4ae5e;
+    --accent-dim: #8a7340;
+    --line: #28251f;
+    --pass: #6b8f4a;
+    --fail: #c5604a;
+    --serif: 'Cormorant Garamond', serif;
+    --sans: 'Inter Tight', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' /%3E%3C/svg%3E");
+  }
+
+  .container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(20px);
+    background: rgba(14, 14, 12, 0.7);
+    border-bottom: 1px solid var(--line);
+    padding: 16px 0;
+  }
+  nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .logo span {
+    color: var(--accent);
+  }
+  .nav-cta {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 10px 18px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+  .nav-cta:hover { background: var(--ink); }
+
+  /* HERO */
+  .hero {
+    padding: 120px 0 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(212, 174, 94, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(56px, 9vw, 124px);
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 40px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .hero h1 .strike {
+    position: relative;
+    color: var(--ink-faint);
+  }
+  .hero h1 .strike::after {
+    content: '';
+    position: absolute;
+    left: -4%;
+    right: -4%;
+    top: 52%;
+    height: 5px;
+    background: var(--accent);
+    transform: rotate(-2deg);
+  }
+  .hero-sub {
+    font-size: 21px;
+    color: var(--ink-dim);
+    max-width: 580px;
+    margin-bottom: 48px;
+    line-height: 1.5;
+  }
+  .waitlist-form {
+    display: flex;
+    gap: 8px;
+    max-width: 480px;
+    margin-bottom: 24px;
+  }
+  .waitlist-form input {
+    flex: 1;
+    padding: 16px 20px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .waitlist-form input:focus {
+    border-color: var(--accent);
+  }
+  .waitlist-form input::placeholder { color: var(--ink-faint); }
+  .waitlist-form button {
+    padding: 16px 28px;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .waitlist-form button:hover { background: var(--ink); }
+  .form-note {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ETYMOLOGY MARK */
+  .etymology {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 40px 0;
+    margin: 100px 0;
+  }
+  .etymology .container {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .etymology-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+  }
+  .etymology-text {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--ink-dim);
+  }
+  .etymology-text strong {
+    color: var(--accent);
+    font-weight: 600;
+    font-style: normal;
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    margin-right: 8px;
+  }
+
+  /* PROBLEM SECTION */
+  section { padding: 100px 0; }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+  .section-h2 {
+    font-family: var(--serif);
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 60px;
+    max-width: 780px;
+  }
+  .section-h2 em { font-style: italic; color: var(--accent); }
+
+  .problem-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  .problem-item {
+    padding: 32px 0 32px 0;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .problem-item:nth-child(odd) {
+    border-right: 1px solid var(--line);
+    padding-right: 40px;
+  }
+  .problem-item:nth-child(even) {
+    padding-left: 40px;
+  }
+  .problem-num {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-style: italic;
+    color: var(--accent-dim);
+  }
+  .problem-text {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .problem-text span {
+    color: var(--ink-dim);
+    font-size: 17px;
+    font-family: var(--sans);
+    display: block;
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  /* HOW IT WORKS */
+  .how-section {
+    background: linear-gradient(180deg, var(--bg) 0%, #0a0a08 100%);
+  }
+  .step-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .step {
+    background: var(--bg);
+    padding: 40px 32px;
+    position: relative;
+  }
+  .step-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .step-title {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .step-desc {
+    font-size: 15px;
+    color: var(--ink-dim);
+    line-height: 1.55;
+  }
+
+  /* MOCKUPS */
+  .mockup-wrapper {
+    position: relative;
+    margin-top: 80px;
+  }
+  .mockup-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    align-items: end;
+  }
+  .phone {
+    background: linear-gradient(180deg, #2a2620 0%, #1a1813 100%);
+    border: 1px solid #3a342a;
+    border-radius: 32px;
+    padding: 6px;
+    aspect-ratio: 9 / 19.5;
+    position: relative;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 174, 94, 0.04);
+  }
+  .phone:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(212, 174, 94, 0.15);
+  }
+  .phone-screen {
+    background: var(--bg);
+    border-radius: 26px;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .phone-notch {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 14px;
+    background: #000;
+    border-radius: 8px;
+    z-index: 10;
+  }
+  .phone-content {
+    height: 100%;
+    overflow: hidden;
+    padding: 30px 12px 36px;
+    font-size: 9px;
+  }
+  .phone-tabbar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 30px;
+    background: rgba(14, 14, 12, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 8px;
+  }
+  .tab-icon {
+    width: 16px; height: 16px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-faint);
+    font-size: 11px;
+  }
+  .tab-icon.active { color: var(--accent); }
+  .phone-label {
+    position: absolute;
+    bottom: -32px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+  }
+
+  /* Phone screen content */
+  .ps-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .ps-week { font-family: var(--mono); font-size: 7px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.15em; }
+  .ps-name { font-family: var(--serif); font-size: 13px; font-weight: 500; line-height: 1.1; margin-top: 2px; }
+  .ps-avatar {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 11px; font-weight: 600; color: var(--bg);
+  }
+  .ps-notif {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 7px;
+    color: var(--ink-dim);
+    position: relative;
+  }
+  .ps-notif::after {
+    content: '';
+    position: absolute;
+    top: -1px; right: -1px;
+    width: 4px; height: 4px;
+    background: var(--fail);
+    border-radius: 50%;
+  }
+  .ps-header-right { display: flex; gap: 6px; align-items: center; }
+
+  .ps-rank-card {
+    background: linear-gradient(135deg, var(--bg-elevated) 0%, #1f1c16 100%);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ps-rank-card::after {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 60px; height: 60px;
+    background: radial-gradient(circle, rgba(212, 174, 94, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .ps-card-label {
+    font-family: var(--mono);
+    font-size: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+  }
+  .ps-rank-row { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 4px; }
+  .ps-rank { font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1; }
+  .ps-rank em { color: var(--accent); font-style: italic; }
+  .ps-rank-meta { font-family: var(--mono); font-size: 6px; color: var(--ink-dim); text-align: right; }
+  .ps-trend { font-size: 7px; color: var(--pass); margin-top: 4px; display: flex; align-items: center; gap: 3px; }
+
+  .ps-cat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+  .ps-cat {
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 7px;
+    position: relative;
+  }
+  .ps-cat-head { display: flex; justify-content: space-between; align-items: center; }
+  .ps-cat-name { font-family: var(--mono); font-size: 6px; text-transform: uppercase; color: var(--accent-dim); letter-spacing: 0.1em; font-weight: 600; }
+  .ps-cat-medal { font-size: 8px; }
+  .ps-cat-rank { font-family: var(--serif); font-size: 14px; font-weight: 500; margin-top: 4px; line-height: 1; }
+  .ps-cat-rank em { color: var(--accent); font-style: italic; }
+  .ps-cat-streak { font-size: 6px; color: var(--ink-dim); margin-top: 3px; display: flex; align-items: center; gap: 2px; }
+  .ps-flame { color: var(--fail); }
+
+  .ps-section-label {
+    font-family: var(--mono);
+    font-size: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    margin: 8px 0 6px;
+  }
+
+  .ps-cta {
+    background: var(--accent);
+    color: var(--bg);
+    border-radius: 4px;
+    padding: 7px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    margin-top: 8px;
+  }
+  .ps-challenge {
+    background: linear-gradient(135deg, rgba(212, 174, 94, 0.08), transparent);
+    border: 1px solid var(--accent-dim);
+    border-radius: 8px;
+    padding: 10px;
+    position: relative;
+  }
+  .ps-challenge-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .ps-challenge-label { font-family: var(--mono); font-size: 6px; text-transform: uppercase; color: var(--accent); letter-spacing: 0.15em; font-weight: 600; }
+  .ps-timer { font-family: var(--mono); font-size: 6px; color: var(--ink-dim); }
+  .ps-challenge-text { font-family: var(--serif); font-size: 11px; font-style: italic; line-height: 1.2; margin: 4px 0 6px; }
+  .ps-challenge-meta { display: flex; gap: 6px; font-family: var(--mono); font-size: 6px; color: var(--ink-dim); }
+  .ps-challenge-meta span { display: flex; align-items: center; gap: 2px; }
+
+  /* Challenge screen */
+  .ps-back-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .ps-back { font-size: 11px; color: var(--ink-dim); display: flex; align-items: center; gap: 4px; }
+  .ps-back-title { font-family: var(--serif); font-size: 11px; font-weight: 500; }
+  .ps-share { font-size: 11px; color: var(--ink-dim); }
+
+  .ps-c-hero {
+    background: linear-gradient(135deg, var(--bg-elevated), #1a1712);
+    border: 1px solid var(--accent-dim);
+    border-radius: 8px;
+    padding: 14px 12px;
+    text-align: center;
+    margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ps-c-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+  .ps-c-level-badge {
+    display: inline-block;
+    font-family: var(--mono); font-size: 6px;
+    color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase;
+    background: rgba(212, 174, 94, 0.1);
+    border: 1px solid var(--accent-dim);
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+  .ps-c-title { font-family: var(--serif); font-size: 12px; font-style: italic; line-height: 1.25; margin-top: 8px; }
+  .ps-c-reward {
+    margin-top: 8px;
+    font-family: var(--mono); font-size: 6px;
+    color: var(--ink-dim); letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .ps-c-reward em { color: var(--accent); font-style: normal; font-weight: 600; }
+
+  .ps-streak {
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px;
+    margin-bottom: 6px;
+  }
+  .ps-streak-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .ps-streak-label { font-family: var(--mono); font-size: 6px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.15em; }
+  .ps-streak-count { font-family: var(--serif); font-size: 11px; color: var(--accent); font-style: italic; }
+  .ps-days { display: flex; gap: 3px; justify-content: space-between; }
+  .ps-day {
+    flex: 1;
+    aspect-ratio: 1;
+    max-width: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono);
+    font-size: 6px;
+    font-weight: 700;
+  }
+  .ps-day.empty { background: transparent; border: 1px solid var(--line); color: var(--ink-faint); }
+  .ps-day.today { background: var(--bg-elevated); border: 1px solid var(--accent); color: var(--accent); }
+
+  .ps-progress-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px;
+    margin-bottom: 6px;
+  }
+  .ps-progress-label { font-family: var(--mono); font-size: 6px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 4px; }
+  .ps-progress-bar { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; position: relative; }
+  .ps-progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); width: 60%; border-radius: 2px; }
+  .ps-progress-meta { font-family: var(--mono); font-size: 6px; color: var(--ink-dim); margin-top: 4px; display: flex; justify-content: space-between; }
+
+  .ps-photo-prompt {
+    border: 1px dashed var(--accent-dim);
+    background: rgba(212, 174, 94, 0.03);
+    border-radius: 8px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .ps-photo-prompt-icon { font-size: 18px; margin-bottom: 4px; }
+  .ps-photo-prompt-text { font-family: var(--serif); font-size: 10px; font-style: italic; }
+  .ps-photo-prompt-sub { font-family: var(--mono); font-size: 6px; color: var(--ink-faint); margin-top: 4px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* Leaderboard screen */
+  .ps-lb-header { margin-bottom: 10px; }
+  .ps-lb-title { font-family: var(--serif); font-size: 16px; font-weight: 500; line-height: 1; }
+  .ps-lb-sub { font-family: var(--mono); font-size: 6px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.15em; margin-top: 4px; }
+  .ps-lb-tabs { display: flex; gap: 4px; margin-bottom: 8px; overflow-x: auto; }
+  .ps-lb-tab {
+    font-family: var(--mono); font-size: 6px;
+    padding: 4px 7px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    color: var(--ink-faint);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+  .ps-lb-tab.active {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    font-weight: 700;
+  }
+  .ps-lb-row {
+    display: flex; align-items: center;
+    padding: 7px 4px;
+    border-bottom: 1px solid var(--line);
+    gap: 7px;
+  }
+  .ps-lb-row.you {
+    background: rgba(212, 174, 94, 0.06);
+    border-left: 2px solid var(--accent);
+    margin: 0 -4px;
+    padding-left: 6px;
+  }
+  .ps-lb-rank { font-family: var(--serif); font-size: 12px; font-weight: 500; width: 14px; }
+  .ps-lb-rank.first { color: var(--accent); }
+  .ps-lb-rank.second { color: var(--ink); }
+  .ps-lb-rank.third { color: #b08555; }
+  .ps-lb-avatar {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--ink-faint);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 8px; font-weight: 600;
+    color: var(--bg);
+  }
+  .ps-lb-info { flex: 1; min-width: 0; }
+  .ps-lb-name { font-size: 9px; font-weight: 600; line-height: 1; }
+  .ps-lb-streak { font-family: var(--mono); font-size: 5px; color: var(--ink-faint); margin-top: 2px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .ps-lb-xp { font-family: var(--mono); font-size: 8px; color: var(--accent); font-weight: 700; }
+  .ps-lb-footer {
+    margin-top: 8px;
+    text-align: center;
+    font-family: var(--serif); font-size: 8px; font-style: italic;
+    color: var(--ink-dim);
+  }
+
+  /* Feed screen */
+  .ps-feed-head-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .ps-feed-title { font-family: var(--serif); font-size: 15px; font-weight: 500; line-height: 1; }
+  .ps-feed-filter { font-family: var(--mono); font-size: 6px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.15em; }
+  .ps-feed-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 6px;
+  }
+  .ps-feed-head { display: flex; align-items: center; gap: 5px; margin-bottom: 6px; }
+  .ps-feed-name { font-size: 9px; font-weight: 600; }
+  .ps-feed-meta {
+    font-family: var(--mono); font-size: 6px;
+    color: var(--ink-faint);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-left: auto;
+  }
+  .ps-feed-img {
+    background: linear-gradient(135deg, #3a3024, #1a1813);
+    border-radius: 4px;
+    height: 48px;
+    margin-bottom: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ps-feed-img.fail { background: linear-gradient(135deg, #4a2820, #1a1813); }
+  .ps-feed-img.success { background: linear-gradient(135deg, #2c3a24, #1a1813); }
+  .ps-feed-img-tag {
+    position: absolute;
+    top: 4px; right: 4px;
+    background: rgba(14, 14, 12, 0.85);
+    backdrop-filter: blur(4px);
+    font-family: var(--mono); font-size: 5px;
+    color: var(--ink); letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 2px 4px;
+    border-radius: 2px;
+  }
+  .ps-feed-status { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+  .ps-feed-pass { font-family: var(--mono); font-size: 7px; color: var(--pass); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+  .ps-feed-fail { font-family: var(--mono); font-size: 7px; color: var(--fail); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+  .ps-feed-xp { font-family: var(--mono); font-size: 7px; color: var(--ink-dim); }
+  .ps-feed-xp em { color: var(--accent); font-style: normal; font-weight: 600; }
+  .ps-roasts {
+    display: flex; gap: 3px; flex-wrap: wrap;
+    padding-top: 5px;
+    border-top: 1px solid var(--line);
+    margin-top: 4px;
+  }
+  .ps-roast {
+    font-family: var(--mono); font-size: 6px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 2px 5px;
+    color: var(--ink-dim);
+  }
+  .ps-roast.hot { border-color: var(--accent-dim); color: var(--accent); }
+
+  /* MECHANICS */
+  .mechanics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .mechanics-text h3 {
+    font-family: var(--serif);
+    font-size: 44px;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+  .mechanics-text h3 em { font-style: italic; color: var(--accent); }
+  .mechanics-text p {
+    font-size: 17px;
+    color: var(--ink-dim);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .xp-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 32px;
+  }
+  .xp-card-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 24px;
+  }
+  .xp-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .xp-row:last-child { border-bottom: none; }
+  .xp-action { font-family: var(--serif); font-size: 19px; }
+  .xp-value { font-family: var(--mono); font-size: 16px; color: var(--accent); font-weight: 600; }
+
+  /* QUOTE */
+  .quote-section {
+    padding: 140px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--bg) 0%, #0a0a08 50%, var(--bg) 100%);
+    position: relative;
+  }
+  .quote-mark {
+    font-family: var(--serif);
+    font-size: 200px;
+    line-height: 0.5;
+    color: var(--accent);
+    opacity: 0.3;
+    position: absolute;
+    left: 32px;
+    top: 80px;
+  }
+  .quote-text {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 44px);
+    font-style: italic;
+    line-height: 1.3;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .quote-attr {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  /* FAQ */
+  .faq-grid { max-width: 880px; margin: 0 auto; }
+  .faq-item {
+    border-bottom: 1px solid var(--line);
+    padding: 32px 0;
+    cursor: pointer;
+  }
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+  }
+  .faq-q-text {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .faq-toggle {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--accent);
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+  .faq-item.open .faq-toggle { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+  }
+  .faq-item.open .faq-a {
+    max-height: 300px;
+    padding-top: 20px;
+  }
+  .faq-a p {
+    font-size: 17px;
+    color: var(--ink-dim);
+    line-height: 1.6;
+  }
+
+  /* FINAL CTA */
+  .final-cta {
+    padding: 140px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(212, 174, 94, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .final-cta h2 {
+    font-family: var(--serif);
+    font-size: clamp(56px, 7vw, 88px);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+  }
+  .final-cta h2 em { font-style: italic; color: var(--accent); }
+  .final-cta p {
+    font-size: 19px;
+    color: var(--ink-dim);
+    max-width: 540px;
+    margin: 0 auto 48px;
+    line-height: 1.5;
+  }
+  .final-cta .waitlist-form {
+    margin: 0 auto 16px;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 60px 0 40px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  .footer-mark {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-style: italic;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .footer-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  /* Responsive */
+  @media (max-width: 880px) {
+    .container { padding: 0 20px; }
+    section { padding: 70px 0; }
+    .hero { padding: 80px 0 60px; }
+    .problem-list { grid-template-columns: 1fr; }
+    .problem-item:nth-child(odd) { border-right: none; padding-right: 0; }
+    .problem-item:nth-child(even) { padding-left: 0; }
+    .step-grid { grid-template-columns: 1fr 1fr; }
+    .mockup-grid { grid-template-columns: 1fr 1fr; gap: 40px 16px; }
+    .mechanics-grid { grid-template-columns: 1fr; gap: 40px; }
+    .etymology .container { grid-template-columns: 1fr; gap: 16px; }
+    .waitlist-form { flex-direction: column; }
+  }
+  @media (max-width: 540px) {
+    .step-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">Kleios<span>.</span></div>
+    <a href="#join" class="nav-cta">Join Waitlist</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">A Game For Men Who Are Done Losing To Themselves</div>
+    <h1>Beat your friends.<br>Or be the <em>burnt pasta</em> guy.</h1>
+    <p class="hero-sub">A competitive app where you and your friends level up the basics — cooking, cleaning, diet — and prove it with photos. Win the week. Or get roasted in the group chat.</p>
+    <form class="waitlist-form" id="hero-form" onsubmit="handleSubmit(event)">
+      <input type="email" placeholder="your@email.com" required />
+      <button type="submit">Get Early Access</button>
+    </form>
+    <div class="form-note">Launching Soon • iOS + Android</div>
+  </div>
+</header>
+
+<div class="etymology">
+  <div class="container">
+    <div class="etymology-label">Klē·os / KLAY-os</div>
+    <div class="etymology-text">
+      <strong>Greek, n.</strong>
+      Glory earned through deeds. The kind of recognition that comes only when others see what you actually did.
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="section-label">Why this exists</div>
+    <h2 class="section-h2">You've downloaded the apps. <em>None of them stuck.</em></h2>
+    <div class="problem-list">
+      <div class="problem-item">
+        <div class="problem-num">01</div>
+        <div class="problem-text">Habit trackers are homework.<span>Nobody cares about your streak except you. Apparently that's not enough.</span></div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-num">02</div>
+        <div class="problem-text">Self-help apps lecture.<span>You wanted a system. They gave you affirmations and a 30-day morning routine.</span></div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-num">03</div>
+        <div class="problem-text">Goals are private. Effort is invisible.<span>The guy at your office who has it together? Nobody told him to. He just had a reason.</span></div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-num">04</div>
+        <div class="problem-text">You're competitive. They're not.<span>You'll run faster on a treadmill next to a stranger than you ever will alone.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how-section">
+  <div class="container">
+    <div class="section-label">How it works</div>
+    <h2 class="section-h2">Pick a category. Do the thing. <em>Prove it.</em></h2>
+    <div class="step-grid">
+      <div class="step">
+        <div class="step-num">Step 01</div>
+        <div class="step-title">Pick your fight</div>
+        <div class="step-desc">Cooking. Clean space. Diet. Choose where you want to climb. Each category is its own leaderboard.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">Step 02</div>
+        <div class="step-title">Get a challenge</div>
+        <div class="step-desc">At your level. Embarrassingly easy at first. Builds up as you build up.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">Step 03</div>
+        <div class="step-title">Snap a photo</div>
+        <div class="step-desc">Pass/fail scoring. Did you actually cook the meal? Is the room actually clean? Simple.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">Step 04</div>
+        <div class="step-title">Win the week</div>
+        <div class="step-desc">Leaderboards reset every Sunday. Your friends see where you rank. Glory is earned, not announced.</div>
+      </div>
+    </div>
+
+    <div class="mockup-wrapper">
+      <div class="mockup-grid">
+        <!-- Phone 1: Home -->
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-content">
+              <div class="ps-header">
+                <div>
+                  <div class="ps-week">Week 12 · Mon</div>
+                  <div class="ps-name">Marcus</div>
+                </div>
+                <div class="ps-header-right">
+                  <div class="ps-notif">🔔</div>
+                  <div class="ps-avatar">M</div>
+                </div>
+              </div>
+              <div class="ps-rank-card">
+                <div class="ps-card-label">Overall Rank</div>
+                <div class="ps-rank-row">
+                  <div class="ps-rank"><em>2nd</em></div>
+                  <div class="ps-rank-meta">720 XP<br>of 5 friends</div>
+                </div>
+                <div class="ps-trend">↑ Up 1 from last week</div>
+              </div>
+              <div class="ps-cat-grid">
+                <div class="ps-cat">
+                  <div class="ps-cat-head">
+                    <div class="ps-cat-name">Cooking</div>
+                    <div class="ps-cat-medal">🥇</div>
+                  </div>
+                  <div class="ps-cat-rank"><em>1st</em></div>
+                  <div class="ps-cat-streak"><span class="ps-flame">🔥</span> 7 days</div>
+                </div>
+                <div class="ps-cat">
+                  <div class="ps-cat-head">
+                    <div class="ps-cat-name">Clean</div>
+                    <div class="ps-cat-medal">🥉</div>
+                  </div>
+                  <div class="ps-cat-rank">3rd</div>
+                  <div class="ps-cat-streak"><span class="ps-flame">🔥</span> 3 days</div>
+                </div>
+                <div class="ps-cat" style="grid-column: span 2;">
+                  <div class="ps-cat-head">
+                    <div class="ps-cat-name">Diet</div>
+                    <div class="ps-cat-medal" style="font-family: var(--mono); font-size: 6px; color: var(--ink-faint); letter-spacing: 0.1em;">JAKE LEADING +9</div>
+                  </div>
+                  <div class="ps-cat-rank">4th</div>
+                </div>
+              </div>
+              <div class="ps-section-label">⚡ Today's Drop</div>
+              <div class="ps-challenge">
+                <div class="ps-challenge-head">
+                  <div class="ps-challenge-label">Cooking · Lvl 3</div>
+                  <div class="ps-timer">11h left</div>
+                </div>
+                <div class="ps-challenge-text">"Cook a meal with 3+ ingredients"</div>
+                <div class="ps-challenge-meta">
+                  <span>+50 XP</span>
+                  <span>· 8 friends did it</span>
+                </div>
+                <div class="ps-cta">Start Challenge</div>
+              </div>
+            </div>
+            <div class="phone-tabbar">
+              <div class="tab-icon active">⌂</div>
+              <div class="tab-icon">◎</div>
+              <div class="tab-icon">≡</div>
+              <div class="tab-icon">◐</div>
+              <div class="tab-icon">●</div>
+            </div>
+          </div>
+          <div class="phone-label">Home</div>
+        </div>
+
+        <!-- Phone 2: Challenge -->
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-content">
+              <div class="ps-back-row">
+                <div class="ps-back">←</div>
+                <div class="ps-back-title">Cooking</div>
+                <div class="ps-share">⎙</div>
+              </div>
+              <div class="ps-c-hero">
+                <div class="ps-c-level-badge">Level 3</div>
+                <div class="ps-c-title">"Cook a meal with at least 3 ingredients"</div>
+                <div class="ps-c-reward">Reward · <em>+50 XP</em></div>
+              </div>
+              <div class="ps-streak">
+                <div class="ps-streak-row">
+                  <div class="ps-streak-label">This Week</div>
+                  <div class="ps-streak-count">6 / 7</div>
+                </div>
+                <div class="ps-days">
+                  <div class="ps-day">M</div>
+                  <div class="ps-day">T</div>
+                  <div class="ps-day">W</div>
+                  <div class="ps-day">T</div>
+                  <div class="ps-day">F</div>
+                  <div class="ps-day">S</div>
+                  <div class="ps-day today">S</div>
+                </div>
+              </div>
+              <div class="ps-progress-card">
+                <div class="ps-progress-label">Level Progress</div>
+                <div class="ps-progress-bar">
+                  <div class="ps-progress-fill"></div>
+                </div>
+                <div class="ps-progress-meta">
+                  <span>3 of 5 to Lvl 4</span>
+                  <span>Unlock: Roast Pan</span>
+                </div>
+              </div>
+              <div class="ps-photo-prompt">
+                <div class="ps-photo-prompt-icon">📷</div>
+                <div class="ps-photo-prompt-text">Snap your proof</div>
+                <div class="ps-photo-prompt-sub">Or post a fail</div>
+              </div>
+            </div>
+            <div class="phone-tabbar">
+              <div class="tab-icon">⌂</div>
+              <div class="tab-icon active">◎</div>
+              <div class="tab-icon">≡</div>
+              <div class="tab-icon">◐</div>
+              <div class="tab-icon">●</div>
+            </div>
+          </div>
+          <div class="phone-label">Challenge</div>
+        </div>
+
+        <!-- Phone 3: Leaderboard -->
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-content">
+              <div class="ps-lb-header">
+                <div class="ps-lb-title">Leaderboard</div>
+                <div class="ps-lb-sub">Apr 21 — Resets Sun · 3d left</div>
+              </div>
+              <div class="ps-lb-tabs">
+                <div class="ps-lb-tab active">All</div>
+                <div class="ps-lb-tab">Cook</div>
+                <div class="ps-lb-tab">Clean</div>
+                <div class="ps-lb-tab">Diet</div>
+              </div>
+              <div class="ps-lb-row">
+                <div class="ps-lb-rank first">1</div>
+                <div class="ps-lb-avatar" style="background: #c5604a;">J</div>
+                <div class="ps-lb-info">
+                  <div class="ps-lb-name">Jake</div>
+                  <div class="ps-lb-streak">🔥 12d</div>
+                </div>
+                <div class="ps-lb-xp">847</div>
+              </div>
+              <div class="ps-lb-row you">
+                <div class="ps-lb-rank second">2</div>
+                <div class="ps-lb-avatar" style="background: #d4ae5e;">M</div>
+                <div class="ps-lb-info">
+                  <div class="ps-lb-name">You</div>
+                  <div class="ps-lb-streak">🔥 9d</div>
+                </div>
+                <div class="ps-lb-xp">720</div>
+              </div>
+              <div class="ps-lb-row">
+                <div class="ps-lb-rank third">3</div>
+                <div class="ps-lb-avatar" style="background: #6b8f4a;">D</div>
+                <div class="ps-lb-info">
+                  <div class="ps-lb-name">Danny</div>
+                  <div class="ps-lb-streak">🔥 5d</div>
+                </div>
+                <div class="ps-lb-xp">580</div>
+              </div>
+              <div class="ps-lb-row">
+                <div class="ps-lb-rank">4</div>
+                <div class="ps-lb-avatar" style="background: #5d5a52;">T</div>
+                <div class="ps-lb-info">
+                  <div class="ps-lb-name">Tyler</div>
+                  <div class="ps-lb-streak">2d</div>
+                </div>
+                <div class="ps-lb-xp">310</div>
+              </div>
+              <div class="ps-lb-row">
+                <div class="ps-lb-rank">5</div>
+                <div class="ps-lb-avatar" style="background: #8a4a3f;">R</div>
+                <div class="ps-lb-info">
+                  <div class="ps-lb-name">Ray</div>
+                  <div class="ps-lb-streak">— cooked</div>
+                </div>
+                <div class="ps-lb-xp">85</div>
+              </div>
+              <div class="ps-lb-footer">127 XP to overtake Jake</div>
+            </div>
+            <div class="phone-tabbar">
+              <div class="tab-icon">⌂</div>
+              <div class="tab-icon">◎</div>
+              <div class="tab-icon active">≡</div>
+              <div class="tab-icon">◐</div>
+              <div class="tab-icon">●</div>
+            </div>
+          </div>
+          <div class="phone-label">Leaderboard</div>
+        </div>
+
+        <!-- Phone 4: Feed -->
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-content">
+              <div class="ps-feed-head-row">
+                <div class="ps-feed-title">Activity</div>
+                <div class="ps-feed-filter">Today ▾</div>
+              </div>
+              <div class="ps-feed-card">
+                <div class="ps-feed-head">
+                  <div class="ps-lb-avatar" style="background: #c5604a; width: 16px; height: 16px; font-size: 7px;">J</div>
+                  <div class="ps-feed-name">Jake</div>
+                  <div class="ps-feed-meta">Cook · 2h</div>
+                </div>
+                <div class="ps-feed-img success">
+                  <div class="ps-feed-img-tag">Stir Fry</div>
+                </div>
+                <div class="ps-feed-status">
+                  <span class="ps-feed-pass">✓ Pass</span>
+                  <span class="ps-feed-xp"><em>+70</em> XP</span>
+                </div>
+                <div class="ps-roasts">
+                  <div class="ps-roast hot">🔥 4</div>
+                  <div class="ps-roast">chef behavior</div>
+                </div>
+              </div>
+              <div class="ps-feed-card">
+                <div class="ps-feed-head">
+                  <div class="ps-lb-avatar" style="background: #8a4a3f; width: 16px; height: 16px; font-size: 7px;">R</div>
+                  <div class="ps-feed-name">Ray</div>
+                  <div class="ps-feed-meta">Diet · 5h</div>
+                </div>
+                <div class="ps-feed-img fail">
+                  <div class="ps-feed-img-tag">Gas Station</div>
+                </div>
+                <div class="ps-feed-status">
+                  <span class="ps-feed-fail">✗ Brave Post</span>
+                  <span class="ps-feed-xp"><em>+20</em> XP</span>
+                </div>
+                <div class="ps-roasts">
+                  <div class="ps-roast hot">my eyes</div>
+                  <div class="ps-roast">villain origin</div>
+                  <div class="ps-roast">+ Tap to roast</div>
+                </div>
+              </div>
+            </div>
+            <div class="phone-tabbar">
+              <div class="tab-icon">⌂</div>
+              <div class="tab-icon">◎</div>
+              <div class="tab-icon">≡</div>
+              <div class="tab-icon active">◐</div>
+              <div class="tab-icon">●</div>
+            </div>
+          </div>
+          <div class="phone-label">Feed + Roasts</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="mechanics-grid">
+      <div class="mechanics-text">
+        <div class="section-label">The Brave Post</div>
+        <h3>Even your <em>worst day</em> earns something.</h3>
+        <p>Falling behind is the moment most apps lose you. Not this one.</p>
+        <p>If you fail a challenge, post it anyway. Your messy kitchen. Your fifth takeout this week. Your friends tap pre-written roasts — "bro what is this," "redemption arc starts tomorrow" — and you both earn XP.</p>
+        <p>The guy losing the leaderboard generates the best content in the feed. Nobody uninstalls. Everybody's engaged.</p>
+      </div>
+      <div class="xp-card">
+        <div class="xp-card-label">XP Economy</div>
+        <div class="xp-row">
+          <div class="xp-action">Pass a challenge</div>
+          <div class="xp-value">+50</div>
+        </div>
+        <div class="xp-row">
+          <div class="xp-action">Brave post</div>
+          <div class="xp-value">+20</div>
+        </div>
+        <div class="xp-row">
+          <div class="xp-action">Roast a friend</div>
+          <div class="xp-value">+10</div>
+        </div>
+        <div class="xp-row">
+          <div class="xp-action">7-day streak bonus</div>
+          <div class="xp-value">+50</div>
+        </div>
+        <div class="xp-row">
+          <div class="xp-action">Win the week</div>
+          <div class="xp-value">+200</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote-section">
+  <div class="container">
+    <div class="quote-mark">"</div>
+    <p class="quote-text">You'll run faster on a treadmill next to a stranger than you ever will alone. Kleios is built on that one truth.</p>
+    <div class="quote-attr">— The Whole Pitch</div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Frequently Asked</div>
+    <h2 class="section-h2">Questions, <em>roasted</em>.</h2>
+    <div class="faq-grid">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <div class="faq-q-text">Is this just another habit tracker?</div>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-a">
+          <p>No. Habit trackers are private. Kleios is competitive. The whole point is that your friends see what you did — and what you didn't. You're not building a habit alone, you're trying to not be last on the leaderboard.</p>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <div class="faq-q-text">What if all my friends are losers?</div>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-a">
+          <p>Even better. The bar is low, the wins are easy, and you'll have something to flex about at the next hangout. Kleios works whether your group is grinding or barely showing up — the comparison alone moves people.</p>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <div class="faq-q-text">How does the AI know if I actually did it?</div>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-a">
+          <p>It checks the photo for the basic thing — was a meal actually cooked, is the counter actually clean. Pass/fail. It's not judging your plating or your decor. It's just verifying you did the thing.</p>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <div class="faq-q-text">Won't I just fall behind and quit?</div>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-a">
+          <p>Leaderboards reset every Sunday. Categories are tracked separately so you can be first in cooking and last in cleaning. And the brave post mechanic means even your fails earn points and become the most entertaining thing in the feed. The app is designed so quitting doesn't feel like the easy way out.</p>
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <div class="faq-q-text">When does this launch?</div>
+          <div class="faq-toggle">+</div>
+        </div>
+        <div class="faq-a">
+          <p>Soon. Building in public — every update goes to the waitlist first. Get on the list to be in the first wave.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta" id="join">
+  <div class="container">
+    <h2>Glory is <em>earned.</em></h2>
+    <p>Stop tracking yourself in private. Start competing where it counts.</p>
+    <form class="waitlist-form" onsubmit="handleSubmit(event)">
+      <input type="email" placeholder="your@email.com" required />
+      <button type="submit">Claim Your Spot</button>
+    </form>
+    <div class="form-note">No spam. Just launch updates.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-mark">Kleios.</div>
+    <div class="footer-meta">© 2026 — Built In Public</div>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    el.classList.toggle('open');
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    const input = e.target.querySelector('input');
+    const button = e.target.querySelector('button');
+    const original = button.textContent;
+    button.textContent = "You're in";
+    button.style.background = '#6b8f4a';
+    input.value = '';
+    setTimeout(() => {
+      button.textContent = original;
+      button.style.background = '';
+    }, 2400);
+  }
+</script>
+
+</body>
+</html>
