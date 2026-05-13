@@ -1,0 +1,21 @@
+const STATS: Array<{ num: string; emph?: string; label: string }> = [
+  { num: '4', emph: '+', label: 'CATEGORIES · YOU OPT IN' },
+  { num: '~5', emph: 's', label: 'AI VERIFICATION TIME' },
+  { num: '1', label: 'CHALLENGE PER DAY · NO MORE' },
+];
+
+export function StatBand() {
+  return (
+    <section className="bg-cream py-[60px] px-6 md:px-10 border-y border-ink/10 grid grid-cols-1 md:grid-cols-3 gap-10">
+      {STATS.map((s) => (
+        <div key={s.label} className="text-center">
+          <div className="font-serif font-bold text-[56px] leading-none tracking-[-2px] text-ink">
+            {s.num}
+            {s.emph && <em className="italic text-plum">{s.emph}</em>}
+          </div>
+          <div className="font-sans font-semibold text-[11px] tracking-[2px] text-muted mt-2">{s.label}</div>
+        </div>
+      ))}
+    </section>
+  );
+}
