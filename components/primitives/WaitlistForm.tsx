@@ -9,10 +9,13 @@ export function WaitlistForm({ onClose }: { onClose: () => void }) {
     e.preventDefault();
     setState('submitting');
     try {
-      const res = await fetch('/api/waitlist', {
+      const res = await fetch('https://formspree.io/f/xpqknyry', {
         method: 'POST',
         body: JSON.stringify({ email }),
-        headers: { 'content-type': 'application/json' },
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
       });
       setState(res.ok ? 'done' : 'error');
     } catch {
