@@ -27,7 +27,7 @@ export function WaitlistForm({ onClose }: { onClose: () => void }) {
     return (
       <div className="bg-cream text-ink rounded-2xl p-5 max-w-[420px] mx-auto text-center">
         <div className="font-serif text-[22px]">You're on the list.</div>
-        <div className="text-[13px] text-muted mt-2">We'll email you when Android lands.</div>
+        <div className="text-[13px] text-muted mt-2">We'll email you when we launch.</div>
         <button onClick={onClose} className="mt-3 text-[12px] underline">close</button>
       </div>
     );
@@ -35,7 +35,7 @@ export function WaitlistForm({ onClose }: { onClose: () => void }) {
 
   return (
     <form onSubmit={submit} className="bg-cream text-ink rounded-2xl p-5 max-w-[420px] mx-auto">
-      <div className="font-serif text-[18px] mb-3">Notify me on Android</div>
+      <div className="font-serif text-[18px] mb-3">Join the waitlist</div>
       <div className="flex gap-2">
         <input
           type="email"

@@ -3,8 +3,6 @@ import { Phone } from '../primitives/Phone';
 import { HomeScreen } from '../phone-screens/HomeScreen';
 import { CameraScreen } from '../phone-screens/CameraScreen';
 import { FeedScreen } from '../phone-screens/FeedScreen';
-import { AppStoreBadge } from '../primitives/AppStoreBadge';
-import { GhostPill } from '../primitives/GhostPill';
 
 export function Hero({ onNotifyClick }: { onNotifyClick: () => void }) {
   return (
@@ -15,7 +13,7 @@ export function Hero({ onNotifyClick }: { onNotifyClick: () => void }) {
           'radial-gradient(ellipse at 28% 18%, rgba(255,245,232,0.18), transparent 55%), linear-gradient(180deg, var(--peach) 0%, var(--pink) 55%, var(--lavender) 100%)',
       }}
     >
-      <Nav />
+      <Nav onNotifyClick={onNotifyClick} />
 
       <div className="font-sans font-semibold text-[11px] tracking-[3.2px] opacity-90 mt-[60px] text-center">
         PHOTO-VERIFIED HABITS · WITH YOUR PEOPLE
@@ -31,9 +29,14 @@ export function Hero({ onNotifyClick }: { onNotifyClick: () => void }) {
         Every day, one small challenge. Snap a photo. AI verifies on the spot. Your friends see your streak — and you see theirs.
       </p>
 
-      <div className="flex gap-3 justify-center mt-[26px] flex-wrap relative z-[3]">
-        <AppStoreBadge />
-        <GhostPill onClick={onNotifyClick}>Notify me on Android <span>→</span></GhostPill>
+      <div className="flex justify-center mt-[26px] relative z-[3]">
+        <button
+          type="button"
+          onClick={onNotifyClick}
+          className="bg-ink text-cream py-[13px] px-6 rounded-[12px] font-sans font-semibold text-[14px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-cream focus-visible:outline-offset-2"
+        >
+          Join the waitlist <span aria-hidden="true">→</span>
+        </button>
       </div>
 
       <div className="flex flex-wrap justify-center gap-[18px] mt-11 relative z-[2]">

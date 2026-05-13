@@ -14,16 +14,11 @@ describe('Closing', () => {
     expect(screen.getByText('day one.')).toBeInTheDocument();
   });
 
-  it('calls onNotifyClick when the Android notify button is clicked', async () => {
+  it('calls onNotifyClick when the waitlist button is clicked', async () => {
     const handler = vi.fn();
     render(<Closing onNotifyClick={handler} />);
-    fireEvent.click(screen.getByRole('button', { name: /notify me on android/i }));
+    fireEvent.click(screen.getByRole('button', { name: /join the waitlist/i }));
     expect(handler).toHaveBeenCalledOnce();
-  });
-
-  it('renders an App Store link', () => {
-    render(<Closing onNotifyClick={() => {}} />);
-    expect(screen.getByRole('link', { name: /app store/i })).toBeInTheDocument();
   });
 });
 
