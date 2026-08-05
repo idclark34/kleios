@@ -31,10 +31,12 @@ export function Hero() {
         on{' '}
         <em
           className="font-serif italic text-ink text-[1.12em] tracking-[-0.01em]"
-          // Cream bloom — the colour the rest of the headline already is — so the
-          // ink reads as lit from within the same light rather than cut out of the
-          // gradient. Radii are in em so they scale with the responsive size.
-          style={{ textShadow: '0 0 0.42em rgba(255,245,232,0.55), 0 0 0.12em rgba(255,245,232,0.45)' }}
+          // Penumbra, not a glow: the halo is the gradient's own colour darkened
+          // (#ff797d x 0.35), so it reads as the word shading the background
+          // rather than a foreign drop shadow. It steps the edge down from
+          // 7.06:1 to ~3.8:1 — ink to dark-tinted ground to gradient — instead
+          // of a hard cut. Radii in em so they scale with the responsive size.
+          style={{ textShadow: '0 0 0.5em rgba(89,42,44,0.5), 0 0 0.18em rgba(89,42,44,0.4)' }}
         >
           proof.
         </em>
