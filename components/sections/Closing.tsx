@@ -16,7 +16,7 @@ export function Closing() {
         Tomorrow can be <em className="italic">day one.</em>
       </h2>
       <p className="font-sans text-[15px] leading-[1.6] opacity-90 mx-auto mt-[22px] max-w-[460px]">
-        Free. Photos and friends only — no ads, no inbox cruft, no dopamine slot machines. Just one small thing, every day, with the people who know you.
+        Free to start. Photos and friends only — no ads, no inbox cruft, no dopamine slot machines. Just the things you said you'd do, with the people who know you.
       </p>
       <div className="flex justify-center mt-7">
         <AppStoreBadge />

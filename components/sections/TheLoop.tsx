@@ -5,14 +5,14 @@ import { Lead } from '../primitives/Lead';
 const STEPS = [
   {
     n: '01',
-    title: 'A challenge, every morning.',
-    body: "One small task, from a category you chose. Read 10 pages. Walk a mile. Photograph something blue. Skip a day? It breaks your streak — not your week.",
-    visual: <div className="w-full h-full bg-sunset flex items-end p-3"><span className="bg-cream/90 text-ink px-2.5 py-1.5 rounded-full text-[10px] font-semibold">Read 10 pages</span></div>,
+    title: 'Write the routine.',
+    body: "You decide what the day should look like. Clear your desk. Wash the dishes. Hit the gym. Kleios holds you to your list, not to someone else's idea of a good habit.",
+    visual: <div className="w-full h-full bg-sunset flex items-end p-3"><span className="bg-cream/90 text-ink px-2.5 py-1.5 rounded-full text-[10px] font-semibold">Clear your desk · +15 XP</span></div>,
   },
   {
     n: '02',
     title: "Show it, don't say it.",
-    body: 'Snap a photo as proof. AI checks it on the spot — usually in about five seconds. Pass, and the day is yours. Fake it, and AI knows.',
+    body: 'Snap a photo as proof. AI checks it on the spot — usually in about five seconds. Pass, and the XP is yours. Fake it, and AI knows.',
     visual: <div className="w-full h-full bg-ink text-cream font-serif text-[32px] flex items-center justify-center">✓</div>,
   },
   {

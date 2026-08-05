@@ -1,8 +1,6 @@
 import { Nav } from './Nav';
 import { Phone } from '../primitives/Phone';
-import { HomeScreen } from '../phone-screens/HomeScreen';
-import { CameraScreen } from '../phone-screens/CameraScreen';
-import { FeedScreen } from '../phone-screens/FeedScreen';
+import { ScreenShot } from '../phone-screens/ScreenShot';
 import { AppStoreBadge } from '../primitives/AppStoreBadge';
 
 export function Hero() {
@@ -27,7 +25,7 @@ export function Hero() {
       </h1>
 
       <p className="font-sans text-[14px] leading-[1.55] text-center max-w-[520px] mx-auto mt-[22px] opacity-90">
-        Every day, one small challenge. Snap a photo. AI verifies on the spot. Your friends see your streak — and you see theirs.
+        Write the routine you actually want. Snap a photo of each task. AI verifies on the spot — and your friends see the proof, not a check-mark.
       </p>
 
       <div className="flex justify-center mt-[26px] relative z-[3]">
@@ -35,9 +33,15 @@ export function Hero() {
       </div>
 
       <div className="flex flex-wrap justify-center gap-[18px] mt-11 relative z-[2]">
-        <Phone tilt="left"><HomeScreen /></Phone>
-        <Phone className="hidden sm:block"><CameraScreen /></Phone>
-        <Phone tilt="right" className="hidden md:block"><FeedScreen /></Phone>
+        <Phone tilt="left">
+          <ScreenShot src="/screens/home.jpg" alt="The Kleios home screen: today's routine with XP on each task" />
+        </Phone>
+        <Phone className="hidden sm:block">
+          <ScreenShot src="/screens/challenge.jpg" alt="A Kleios task ready for its proof photo" />
+        </Phone>
+        <Phone tilt="right" className="hidden md:block">
+          <ScreenShot src="/screens/feed-dishes.jpg" alt="A friend's verified proof photo in the Kleios feed" />
+        </Phone>
       </div>
     </header>
   );

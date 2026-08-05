@@ -1,19 +1,26 @@
 import { FeatureBlock } from './FeatureBlock';
 import { Phone } from '../primitives/Phone';
-import { GroupsScreen } from '../phone-screens/GroupsScreen';
+import { ScreenShot } from '../phone-screens/ScreenShot';
 
 export function GroupsFeature() {
   return (
     <FeatureBlock
       eyebrow="GROUPS"
       headline={<>Do it as a <em className="italic text-plum">group.</em></>}
-      body="Make a group with friends, your roommates, the people from book club. Everyone gets the same challenge, every day. Photos go to the same feed. So does the banter."
+      body="Make a group with friends, your roommates, the people from book club. Everyone's proof lands in the same feed, as it happens. So does the banter."
       bullets={[
-        'Same daily challenge for everyone in the group',
         'A shared feed, just for the group',
         'Streaks per person, leaderboard per group',
+        'Comment on the photo, not the check-mark',
       ]}
-      visual={<Phone><GroupsScreen /></Phone>}
+      visual={
+        <Phone>
+          <ScreenShot
+            src="/screens/proof-bed.jpg"
+            alt="A shared Kleios feed showing proof photos from two friends"
+          />
+        </Phone>
+      }
     />
   );
 }

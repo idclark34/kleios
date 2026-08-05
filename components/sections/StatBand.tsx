@@ -1,7 +1,7 @@
 const STATS: Array<{ num: string; emph?: string; label: string }> = [
-  { num: '4', emph: '+', label: 'CATEGORIES · YOU OPT IN' },
+  { num: '1', label: 'PHOTO PER TASK · NO EXCEPTIONS' },
   { num: '~5', emph: 's', label: 'AI VERIFICATION TIME' },
-  { num: '1', label: 'CHALLENGE PER DAY · NO MORE' },
+  { num: '0', label: 'CHECK-BOXES TO TICK' },
 ];
 
 export function StatBand() {

@@ -7,7 +7,9 @@ export function Phone({
   tilt = 'none',
   className = '',
   w = 170,
-  h = 348,
+  // 170 × 368 matches the 1179 × 2556 iPhone captures in /public/screens, so a
+  // ScreenShot fills the frame without cropping the status bar or the tab bar.
+  h = 368,
 }: {
   children: ReactNode;
   tilt?: Tilt;

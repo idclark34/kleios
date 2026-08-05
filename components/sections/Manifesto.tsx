@@ -24,7 +24,7 @@ export function Manifesto() {
             Most habit apps run on willpower. They give you a checkbox, a streak meter, a green dot, and quietly hope you don't quit them by next Wednesday. Most people quit them by next Wednesday.
           </p>
           <p>
-            Kleios runs on proof. Each morning brings one small thing. You do it, you take a photo, AI looks at the photo, and your friends see the receipt. The willpower isn't yours alone — it's distributed across the people who know you.
+            Kleios runs on proof. You write the routine, you do the thing, you take a photo, AI looks at the photo, and your friends see the receipt. The willpower isn't yours alone — it's distributed across the people who know you.
           </p>
           <p>
             We don't think habits are heroic. We think they're boring. The boring middle is the point.

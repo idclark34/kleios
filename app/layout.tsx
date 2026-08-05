@@ -20,7 +20,7 @@ const interTight = Inter_Tight({
 export const metadata: Metadata = {
   title: 'Kleios — habits run on proof, not willpower',
   description:
-    'A photo-verified social habit app. One small challenge a day. AI verifies. Your friends watch your streak.',
+    'A photo-verified social habit app. Write your own daily routine, prove each task with a photo, and let AI check the work. Your friends see the proof, not a check-mark.',
   openGraph: {
     title: 'Kleios',
     description: 'A photo-verified social habit app.',
