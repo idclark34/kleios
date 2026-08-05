@@ -28,7 +28,16 @@ export function Hero() {
       >
         Habits don't run<br />
         on <s className="opacity-[0.78] decoration-[2px] decoration-cream/55">willpower</s>. They run<br />
-        on <em className="font-serif italic text-ink text-[1.12em] tracking-[-0.01em] [text-shadow:none]">proof.</em>
+        on{' '}
+        <em
+          className="font-serif italic text-ink text-[1.12em] tracking-[-0.01em]"
+          // Cream bloom — the colour the rest of the headline already is — so the
+          // ink reads as lit from within the same light rather than cut out of the
+          // gradient. Radii are in em so they scale with the responsive size.
+          style={{ textShadow: '0 0 0.42em rgba(255,245,232,0.55), 0 0 0.12em rgba(255,245,232,0.45)' }}
+        >
+          proof.
+        </em>
       </h1>
 
       <p className="font-sans text-[14px] leading-[1.55] text-center max-w-[520px] mx-auto mt-[22px] opacity-90">
