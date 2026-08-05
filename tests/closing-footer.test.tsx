@@ -1,24 +1,25 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Closing } from '@/components/sections/Closing';
 import { Footer } from '@/components/sections/Footer';
 
 describe('Closing', () => {
   it('renders the DAY 1 eyebrow', () => {
-    render(<Closing onNotifyClick={() => {}} />);
+    render(<Closing />);
     expect(screen.getByText('DAY 1')).toBeInTheDocument();
   });
 
   it('renders the headline with italic "day one."', () => {
-    render(<Closing onNotifyClick={() => {}} />);
+    render(<Closing />);
     expect(screen.getByText('Tomorrow can be')).toBeInTheDocument();
     expect(screen.getByText('day one.')).toBeInTheDocument();
   });
 
-  it('calls onNotifyClick when the waitlist button is clicked', async () => {
-    const handler = vi.fn();
-    render(<Closing onNotifyClick={handler} />);
-    fireEvent.click(screen.getByRole('button', { name: /join the waitlist/i }));
-    expect(handler).toHaveBeenCalledOnce();
+  it('links the App Store badge to the listing', () => {
+    render(<Closing />);
+    expect(screen.getByRole('link', { name: /download kleios on the app store/i })).toHaveAttribute(
+      'href',
+      'https://apps.apple.com/us/app/kleios/id6765974356',
+    );
   });
 });
 

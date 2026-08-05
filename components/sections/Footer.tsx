@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { APP_STORE_URL } from '../primitives/AppStoreBadge';
 
 export function Footer() {
   return (
@@ -7,12 +8,13 @@ export function Footer() {
         <div>
           <div className="font-serif text-[20px] tracking-[4px] text-cream">KLEIOS</div>
           <div className="mt-2 text-[11px] opacity-70 max-w-[240px] leading-[1.5]">
-            A photo-verified social habit app. Made by a small team, in friends-and-family beta.
+            A photo-verified social habit app. Made by a small team. Now on the App Store.
           </div>
         </div>
         <div className="flex flex-wrap gap-y-6 gap-x-[60px]">
           <div>
             <h4 className="font-semibold text-[10px] tracking-[2px] text-cream mb-3">PRODUCT</h4>
+            <FooterLink href={APP_STORE_URL}>Download on iPhone</FooterLink>
             <FooterLink href="#how">How it works</FooterLink>
             <FooterLink href="#">Categories</FooterLink>
             <FooterLink href="#">Groups</FooterLink>

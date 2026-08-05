@@ -3,8 +3,9 @@ import { Phone } from '../primitives/Phone';
 import { HomeScreen } from '../phone-screens/HomeScreen';
 import { CameraScreen } from '../phone-screens/CameraScreen';
 import { FeedScreen } from '../phone-screens/FeedScreen';
+import { AppStoreBadge } from '../primitives/AppStoreBadge';
 
-export function Hero({ onNotifyClick }: { onNotifyClick: () => void }) {
+export function Hero() {
   return (
     <header
       className="relative bg-sunset text-cream overflow-hidden px-6 md:px-10 pt-[22px] pb-14"
@@ -13,7 +14,7 @@ export function Hero({ onNotifyClick }: { onNotifyClick: () => void }) {
           'radial-gradient(ellipse at 28% 18%, rgba(255,245,232,0.18), transparent 55%), linear-gradient(180deg, var(--peach) 0%, var(--pink) 55%, var(--lavender) 100%)',
       }}
     >
-      <Nav onNotifyClick={onNotifyClick} />
+      <Nav />
 
       <div className="font-sans font-semibold text-[11px] tracking-[3.2px] opacity-90 mt-[60px] text-center">
         PHOTO-VERIFIED HABITS · WITH YOUR PEOPLE
@@ -30,13 +31,7 @@ export function Hero({ onNotifyClick }: { onNotifyClick: () => void }) {
       </p>
 
       <div className="flex justify-center mt-[26px] relative z-[3]">
-        <button
-          type="button"
-          onClick={onNotifyClick}
-          className="bg-ink text-cream py-[13px] px-6 rounded-[12px] font-sans font-semibold text-[14px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-cream focus-visible:outline-offset-2"
-        >
-          Join the waitlist <span aria-hidden="true">→</span>
-        </button>
+        <AppStoreBadge />
       </div>
 
       <div className="flex flex-wrap justify-center gap-[18px] mt-11 relative z-[2]">

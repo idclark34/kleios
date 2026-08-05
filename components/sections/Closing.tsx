@@ -1,6 +1,7 @@
 import { Eyebrow } from '../primitives/Eyebrow';
+import { AppStoreBadge } from '../primitives/AppStoreBadge';
 
-export function Closing({ onNotifyClick }: { onNotifyClick: () => void }) {
+export function Closing() {
   return (
     <section
       id="join"
@@ -15,16 +16,10 @@ export function Closing({ onNotifyClick }: { onNotifyClick: () => void }) {
         Tomorrow can be <em className="italic">day one.</em>
       </h2>
       <p className="font-sans text-[15px] leading-[1.6] opacity-90 mx-auto mt-[22px] max-w-[460px]">
-        Free in beta. Photos and friends only — no ads, no inbox cruft, no dopamine slot machines. Just one small thing, every day, with the people who know you.
+        Free. Photos and friends only — no ads, no inbox cruft, no dopamine slot machines. Just one small thing, every day, with the people who know you.
       </p>
       <div className="flex justify-center mt-7">
-        <button
-          type="button"
-          onClick={onNotifyClick}
-          className="bg-ink text-cream py-[13px] px-6 rounded-[12px] font-sans font-semibold text-[14px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-cream focus-visible:outline-offset-2"
-        >
-          Join the waitlist <span aria-hidden="true">→</span>
-        </button>
+        <AppStoreBadge />
       </div>
     </section>
   );
