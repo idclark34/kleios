@@ -18,10 +18,17 @@ export function Hero() {
         PHOTO-VERIFIED HABITS · WITH YOUR PEOPLE
       </div>
 
-      <h1 className="font-serif font-bold text-center mt-4 text-[42px] md:text-[64px] leading-[0.98] tracking-[-2.5px] relative z-[3]">
+      {/* Type matches the app's own hero (SunsetHome heroStyles.title): Inter
+          Tight Bold, -0.03em tracking, 1.05 line-height, soft ink shadow. The
+          app has no italic sans — only serifItalic — so the "proof." accent
+          stays Cormorant, sized up to compensate for its smaller x-height. */}
+      <h1
+        className="font-sans font-bold text-center mt-4 text-[42px] md:text-[64px] leading-[1.05] tracking-[-0.03em] relative z-[3]"
+        style={{ textShadow: '0 3px 12px rgba(28, 22, 18, 0.18)' }}
+      >
         Habits don't run<br />
         on <s className="opacity-[0.78] decoration-[2px] decoration-cream/55">willpower</s>. They run<br />
-        on <em className="italic">proof.</em>
+        on <em className="font-serif italic text-[1.12em] tracking-[-0.01em]">proof.</em>
       </h1>
 
       <p className="font-sans text-[14px] leading-[1.55] text-center max-w-[520px] mx-auto mt-[22px] opacity-90">
