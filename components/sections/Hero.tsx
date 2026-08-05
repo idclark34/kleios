@@ -39,12 +39,14 @@ export function Hero() {
         on{' '}
         <em
           className="font-serif italic text-ink text-[1.41em] tracking-[-0.01em]"
-          // Halo, not a glow. Darkening the surround narrows the step from glyph
-          // to ground (7.06:1 -> ~3.7:1) so the ink is softly seated rather than
-          // cut out; a light halo would widen it. Same ink as the h1's own
-          // shadow above, so the whole headline shares one shadow hue. Radii in
-          // em to scale with the responsive size.
-          style={{ textShadow: '0 0 0.5em rgba(28,22,18,0.35), 0 0 0.18em rgba(28,22,18,0.3)' }}
+          // Halo, not a glow: darkening the surround seats the ink in the
+          // gradient instead of cutting it out. Same ink as the h1's own shadow,
+          // so the headline shares one shadow hue. Radii are em-relative and
+          // this word is 1.41em, so they land ~41% larger than the raw number —
+          // 0.34em is 31px at the 64px desktop hero. Kept deliberately light;
+          // past roughly 0.4em/30% it stops reading as shading and starts
+          // reading as smudge around Cormorant's fine italic strokes.
+          style={{ textShadow: '0 0 0.34em rgba(28,22,18,0.24), 0 0 0.12em rgba(28,22,18,0.20)' }}
         >
           proof.
         </em>
