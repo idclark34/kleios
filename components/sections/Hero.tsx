@@ -19,9 +19,11 @@ export function Hero() {
       </div>
 
       {/* Type matches the app's own hero (SunsetHome heroStyles.title): Inter
-          Tight Bold, -0.03em tracking, 1.05 line-height, soft ink shadow. The
-          app has no italic sans — only serifItalic — so the "proof." accent
-          stays Cormorant, sized up to compensate for its smaller x-height. */}
+          Tight Bold, -0.03em tracking, 1.05 line-height, soft ink shadow.
+          "proof." stays in the same face at the same size — the ink and its
+          halo already mark it, so a second typeface would be two emphasis
+          mechanisms doing one job. not-italic overrides the UA default on <em>,
+          which is kept for the semantics rather than the slant. */}
       <h1
         className="font-sans font-bold text-center mt-4 text-[42px] md:text-[64px] leading-[1.05] tracking-[-0.03em] relative z-[3]"
         style={{ textShadow: '0 3px 12px rgba(28, 22, 18, 0.18)' }}
@@ -30,7 +32,7 @@ export function Hero() {
         on <s className="opacity-[0.78] decoration-[2px] decoration-cream/55">willpower</s>. They run<br />
         on{' '}
         <em
-          className="font-serif italic text-ink text-[1.12em] tracking-[-0.01em]"
+          className="not-italic text-ink"
           // Halo, not a glow. Darkening the surround narrows the step from glyph
           // to ground (7.06:1 -> ~3.7:1) so the ink is softly seated rather than
           // cut out; a light halo would widen it. Same ink as the h1's own
