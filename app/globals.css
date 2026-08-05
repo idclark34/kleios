@@ -25,9 +25,12 @@
   --background-image-sunset: linear-gradient(180deg, var(--peach) 0%, var(--pink) 55%, var(--lavender) 100%);
   --background-image-sunset-end: linear-gradient(180deg, var(--pink) 0%, var(--lavender) 100%);
 
-  /* Font families (CSS vars set by next/font in layout.tsx) */
-  --font-family-serif: var(--font-cormorant), Georgia, serif;
-  --font-family-sans: var(--font-inter-tight), -apple-system, sans-serif;
+  /* Font families (CSS vars set by next/font in layout.tsx).
+     Tailwind v4 reads these from the --font-* namespace; --font-family-*
+     is the v3 name and compiles to nothing, silently leaving font-serif
+     as Georgia and font-sans as system-ui. */
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-inter-tight), -apple-system, sans-serif;
 }
 
 body {
