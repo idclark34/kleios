@@ -25,11 +25,17 @@ export function Hero() {
           is the size at which the two sit level rather than the serif looking
           shrunken. */}
       <h1
-        className="font-sans font-bold text-center mt-4 text-[42px] md:text-[64px] leading-[1.05] tracking-[-0.03em] relative z-[3]"
+        className="font-sans font-bold text-center mt-4 text-[42px] md:text-[64px] leading-[1.05] tracking-[-0.03em] text-balance relative z-[3]"
         style={{ textShadow: '0 3px 12px rgba(28, 22, 18, 0.18)' }}
       >
         Habits don't run<br />
-        on <s className="opacity-[0.78] decoration-[2px] decoration-cream/55">willpower</s>. They run<br />
+        on <s className="opacity-[0.78] decoration-[2px] decoration-cream/55">willpower</s>.{' '}
+        {/* "on willpower. They run" needs 411px at 42px — wider than any phone
+            (a 390px device gives 342px), so it orphaned "run" onto its own
+            line. Break it in two below md; the widest mobile line is then
+            290px and the type stays at full size. */}
+        <br className="md:hidden" />
+        They run<br />
         on{' '}
         <em
           className="font-serif italic text-ink text-[1.41em] tracking-[-0.01em]"
