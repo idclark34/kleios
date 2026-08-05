@@ -31,12 +31,12 @@ export function Hero() {
         on{' '}
         <em
           className="font-serif italic text-ink text-[1.12em] tracking-[-0.01em]"
-          // Penumbra, not a glow: the halo is the gradient's own colour darkened
-          // (#ff797d x 0.35), so it reads as the word shading the background
-          // rather than a foreign drop shadow. It steps the edge down from
-          // 7.06:1 to ~3.8:1 — ink to dark-tinted ground to gradient — instead
-          // of a hard cut. Radii in em so they scale with the responsive size.
-          style={{ textShadow: '0 0 0.5em rgba(89,42,44,0.5), 0 0 0.18em rgba(89,42,44,0.4)' }}
+          // Halo, not a glow. Darkening the surround narrows the step from glyph
+          // to ground (7.06:1 -> ~3.7:1) so the ink is softly seated rather than
+          // cut out; a light halo would widen it. Same ink as the h1's own
+          // shadow above, so the whole headline shares one shadow hue. Radii in
+          // em to scale with the responsive size.
+          style={{ textShadow: '0 0 0.5em rgba(28,22,18,0.35), 0 0 0.18em rgba(28,22,18,0.3)' }}
         >
           proof.
         </em>
