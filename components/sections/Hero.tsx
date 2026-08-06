@@ -52,7 +52,7 @@ export function Hero() {
       </h1>
 
       <p className="font-sans text-[14px] leading-[1.55] text-center max-w-[520px] mx-auto mt-[22px] opacity-90">
-        Write the routine you actually want. Snap a photo of each task. AI verifies on the spot — and your friends see the proof, not a check-mark.
+        Timed focus sessions that block your worst apps, closed out with a photo that has to hold up.
       </p>
 
       <div className="flex justify-center mt-[26px] relative z-[3]">
