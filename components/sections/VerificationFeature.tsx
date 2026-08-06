@@ -6,6 +6,7 @@ import { ScreenShot } from '../phone-screens/ScreenShot';
 export function VerificationFeature() {
   return (
     <FeatureBlock
+      reverse
       visualBg="ink"
       eyebrow="VERIFICATION"
       headline={<>The AI is <Accent className="text-plum">fair.</Accent></>}

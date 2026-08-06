@@ -4,6 +4,7 @@ import { TheLoop } from '@/components/sections/TheLoop';
 import { Manifesto } from '@/components/sections/Manifesto';
 import { GroupsFeature } from '@/components/sections/GroupsFeature';
 import { RoutineFeature } from '@/components/sections/RoutineFeature';
+import { LockInFeature } from '@/components/sections/LockInFeature';
 import { VerificationFeature } from '@/components/sections/VerificationFeature';
 import { Closing } from '@/components/sections/Closing';
 import { Footer } from '@/components/sections/Footer';
@@ -17,6 +18,7 @@ export default function Home() {
       <Manifesto />
       <GroupsFeature />
       <RoutineFeature />
+      <LockInFeature />
       <VerificationFeature />
       <Closing />
       <Footer />
