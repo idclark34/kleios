@@ -2,6 +2,7 @@ import { Nav } from './Nav';
 import { Phone } from '../primitives/Phone';
 import { ScreenShot } from '../phone-screens/ScreenShot';
 import { AppStoreBadge } from '../primitives/AppStoreBadge';
+import { Accent } from '../primitives/Accent';
 
 export function Hero() {
   return (
@@ -20,10 +21,8 @@ export function Hero() {
 
       {/* Type matches the app's own hero (SunsetHome heroStyles.title): Inter
           Tight Bold, -0.03em tracking, 1.05 line-height, soft ink shadow.
-          "proof." is Cormorant italic at 1.41em — Inter Tight's x-height is
-          0.546em against Cormorant's 0.386em, and 0.546/0.386 = 1.41, so that
-          is the size at which the two sit level rather than the serif looking
-          shrunken. */}
+          "proof." uses <Accent>, the shared serif-italic accent (see that file
+          for the 1.41em x-height match). */}
       <h1
         className="font-sans font-bold text-center mt-4 text-[42px] md:text-[64px] leading-[1.05] tracking-[-0.03em] text-balance relative z-[3]"
         style={{ textShadow: '0 3px 12px rgba(28, 22, 18, 0.18)' }}
@@ -37,8 +36,8 @@ export function Hero() {
         <br className="md:hidden" />
         They run<br />
         on{' '}
-        <em
-          className="font-serif italic text-ink text-[1.41em] tracking-[-0.01em]"
+        <Accent
+          className="text-ink"
           // Halo, not a glow: darkening the surround seats the ink in the
           // gradient instead of cutting it out. Same ink as the h1's own shadow,
           // so the headline shares one shadow hue. Radii are em-relative and
@@ -49,7 +48,7 @@ export function Hero() {
           style={{ textShadow: '0 0 0.34em rgba(28,22,18,0.24), 0 0 0.12em rgba(28,22,18,0.20)' }}
         >
           proof.
-        </em>
+        </Accent>
       </h1>
 
       <p className="font-sans text-[14px] leading-[1.55] text-center max-w-[520px] mx-auto mt-[22px] opacity-90">

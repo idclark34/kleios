@@ -1,5 +1,6 @@
 import { FeatureBlock } from './FeatureBlock';
 import { Phone } from '../primitives/Phone';
+import { Accent } from '../primitives/Accent';
 import { ScreenShot } from '../phone-screens/ScreenShot';
 
 export function RoutineFeature() {
@@ -7,7 +8,7 @@ export function RoutineFeature() {
     <FeatureBlock
       reverse
       eyebrow="YOUR ROUTINE"
-      headline={<>Your routine. Your <em className="italic text-plum">rules.</em></>}
+      headline={<>Your routine. Your <Accent className="text-plum">rules.</Accent></>}
       body="Kleios doesn't hand you someone else's challenge. You write the list — clear your desk, drink a glass of water, hit the gym — and every task on it needs a photo before it counts."
       bullets={[
         'Write your own list — add, reorder, or drop tasks anytime',

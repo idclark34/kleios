@@ -1,6 +1,7 @@
 import { Eyebrow } from '../primitives/Eyebrow';
 import { Display } from '../primitives/Display';
 import { Lead } from '../primitives/Lead';
+import { Accent } from '../primitives/Accent';
 
 const STEPS = [
   {
@@ -13,7 +14,7 @@ const STEPS = [
     n: '02',
     title: "Show it, don't say it.",
     body: 'Snap a photo as proof. AI checks it on the spot — usually in about five seconds. Pass, and the XP is yours. Fake it, and AI knows.',
-    visual: <div className="w-full h-full bg-ink text-cream font-serif text-[32px] flex items-center justify-center">✓</div>,
+    visual: <div className="w-full h-full bg-ink text-cream font-sans text-[32px] flex items-center justify-center">✓</div>,
   },
   {
     n: '03',
@@ -28,7 +29,7 @@ export function TheLoop() {
     <section id="how" className="bg-cream py-[90px] px-6 md:px-10">
       <div className="max-w-[600px] mx-auto text-center">
         <Eyebrow>THE LOOP</Eyebrow>
-        <Display className="mt-3.5">Daily, with <em className="italic text-plum">your people.</em></Display>
+        <Display className="mt-3.5">Daily, with <Accent className="text-plum">your people.</Accent></Display>
         <Lead className="mt-4 mx-auto">
           Kleios is a habit app where the receipt is a photo, the referee is AI, and the audience is your friends.
         </Lead>
@@ -36,8 +37,8 @@ export function TheLoop() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-9 mt-[60px]">
         {STEPS.map((s) => (
           <div key={s.n}>
-            <div className="font-serif font-bold text-[38px] leading-none text-plum">{s.n}</div>
-            <h3 className="font-serif font-bold text-[22px] leading-[1.15] tracking-[-0.4px] mt-3 mb-2">{s.title}</h3>
+            <div className="font-sans font-bold text-[38px] leading-none tracking-[-0.03em] text-plum">{s.n}</div>
+            <h3 className="font-sans font-bold text-[22px] leading-[1.15] tracking-[-0.02em] mt-3 mb-2">{s.title}</h3>
             <p className="font-sans text-[13px] leading-[1.6] text-muted">{s.body}</p>
             <div className="mt-[18px] h-[140px] rounded-lg border border-ink/10 overflow-hidden relative">
               {s.visual}

@@ -1,4 +1,5 @@
 import { Eyebrow } from '../primitives/Eyebrow';
+import { Accent } from '../primitives/Accent';
 
 export function Manifesto() {
   return (
@@ -15,9 +16,9 @@ export function Manifesto() {
       />
       <div className="relative max-w-[640px]">
         <Eyebrow tone="peach">WHY KLEIOS</Eyebrow>
-        <h2 className="font-serif font-bold text-[40px] md:text-[56px] leading-[1.0] tracking-[-2px] mt-3.5">
+        <h2 className="font-sans font-bold text-[40px] md:text-[56px] leading-[1.05] tracking-[-0.03em] text-balance mt-3.5">
           Track everything.<br />
-          Forget by <em className="italic text-peach">Wednesday.</em>
+          Forget by <Accent className="text-peach">Wednesday.</Accent>
         </h2>
         <div className="mt-6 max-w-[540px] text-cream/80 font-sans text-[15px] leading-[1.7] space-y-3.5">
           <p>

@@ -6,7 +6,7 @@ export function Footer() {
     <footer className="bg-ink text-cream/70 px-6 md:px-10 pt-[50px] pb-[30px] font-sans text-[12px]">
       <div className="flex flex-col md:flex-row justify-between items-start pb-[30px] border-b border-cream/10 gap-8">
         <div>
-          <div className="font-serif text-[20px] tracking-[4px] text-cream">KLEIOS</div>
+          <div className="font-sans font-semibold text-[18px] tracking-[0.32em] text-cream">KLEIOS</div>
           <div className="mt-2 text-[11px] opacity-70 max-w-[240px] leading-[1.5]">
             A photo-verified social habit app. Made by a small team. Now on the App Store.
           </div>

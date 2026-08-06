@@ -1,4 +1,5 @@
 import { Eyebrow } from '../primitives/Eyebrow';
+import { Accent } from '../primitives/Accent';
 import { AppStoreBadge } from '../primitives/AppStoreBadge';
 
 export function Closing() {
@@ -12,8 +13,8 @@ export function Closing() {
       }}
     >
       <Eyebrow tone="cream">DAY 1</Eyebrow>
-      <h2 className="font-serif font-bold text-[40px] md:text-[64px] leading-[0.98] tracking-[-2.5px] mt-3.5">
-        Tomorrow can be <em className="italic">day one.</em>
+      <h2 className="font-sans font-bold text-[40px] md:text-[64px] leading-[1.05] tracking-[-0.03em] text-balance mt-3.5">
+        Tomorrow can be <Accent>day one.</Accent>
       </h2>
       <p className="font-sans text-[15px] leading-[1.6] opacity-90 mx-auto mt-[22px] max-w-[460px]">
         Free to start. Photos and friends only — no ads, no inbox cruft, no dopamine slot machines. Just the things you said you'd do, with the people who know you.

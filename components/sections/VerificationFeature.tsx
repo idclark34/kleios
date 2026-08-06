@@ -1,5 +1,6 @@
 import { FeatureBlock } from './FeatureBlock';
 import { Phone } from '../primitives/Phone';
+import { Accent } from '../primitives/Accent';
 import { ScreenShot } from '../phone-screens/ScreenShot';
 
 export function VerificationFeature() {
@@ -7,7 +8,7 @@ export function VerificationFeature() {
     <FeatureBlock
       visualBg="ink"
       eyebrow="VERIFICATION"
-      headline={<>The AI is <em className="italic text-plum">fair.</em></>}
+      headline={<>The AI is <Accent className="text-plum">fair.</Accent></>}
       body="We trained the verifier to be a generous referee: it looks for evidence the task happened, not a perfect, polished photo. A messy bookshelf, a sweaty selfie, a half-eaten dish — all fine, as long as they're real."
       bullets={[
         'Verdict in ~5 seconds, on average',
